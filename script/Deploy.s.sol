@@ -34,14 +34,27 @@ import {EpochRebalanceHook} from "src/hooks/EpochRebalanceHook.sol";
  * deployed at its mined address is reported and skipped rather than redeployed.
  */
 contract DeployEpochRebalance is Script {
-    uint160 internal constant FLAGS = uint160(0);
+    uint160 internal constant FLAGS = uint160(Hooks.BEFORE_INITIALIZE_FLAG | Hooks.BEFORE_ADD_LIQUIDITY_FLAG | Hooks.BEFORE_REMOVE_LIQUIDITY_FLAG | Hooks.BEFORE_SWAP_FLAG | Hooks.BEFORE_SWAP_RETURNS_DELTA_FLAG);
+
+    /// @notice Set before deploying: this is part of what the pool is, and it cannot change afterwards.
+    tuple[] public schedule_;
+
+    /// @notice Set before deploying: this is part of what the pool is, and it cannot change afterwards.
+    uint256 public _swapFeeBps;
+
+    /// @notice Set before deploying: this is part of what the pool is, and it cannot change afterwards.
+    string public shareName;
+
+    /// @notice Set before deploying: this is part of what the pool is, and it cannot change afterwards.
+    string public shareSymbol;
+
 
     function run() external {
         IPoolManager manager = Chains.poolManager(block.chainid);
         require(address(manager) != address(0), "no Uniswap v4 PoolManager known for this chain");
 
         bytes memory creationCode = type(EpochRebalanceHook).creationCode;
-        bytes memory constructorArgs = abi.encode(manager);
+        bytes memory constructorArgs = abi.encode(manager, schedule_, _swapFeeBps, shareName, shareSymbol);
 
         (address predicted, bytes32 salt) =
             HookMiner.find(Chains.CREATE2_DEPLOYER, FLAGS, creationCode, constructorArgs);
@@ -56,7 +69,7 @@ contract DeployEpochRebalance is Script {
         }
 
         vm.startBroadcast();
-        EpochRebalanceHook hook = new EpochRebalanceHook{salt: salt}(manager);
+        EpochRebalanceHook hook = new EpochRebalanceHook{salt: salt}(manager, schedule_, _swapFeeBps, shareName, shareSymbol);
         vm.stopBroadcast();
 
         require(address(hook) == predicted, "mined address did not match the deployment");
