@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: If you use this software, please cite it as below.
+title: "epoch-rebalance"
+abstract: "An index whose whole future is fixed before anybody deposits: the pool's target allocation glides along a schedule written at deployment, and nobody, including the deployer, can change it afterwards."
+license: Apache-2.0
+repository-code: "https://github.com/nirholas/epoch-rebalance"
+url: "https://three.ws"
+authors:
+  - name: three.ws
+    website: "https://three.ws"
