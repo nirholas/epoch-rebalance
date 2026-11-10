@@ -6,6 +6,7 @@
     "name": "nirholas"
   },
   "repository": "https://github.com/nirholas/epoch-rebalance",
+  "homepage": "https://epoch-rebalance.pages.dev",
   "license": "Apache-2.0",
   "keywords": [
     "uniswap-v4",
