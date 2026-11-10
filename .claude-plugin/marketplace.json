@@ -1,0 +1,23 @@
+{
+  "name": "epoch-rebalance",
+  "owner": {
+    "name": "nirholas"
+  },
+  "description": "EpochRebalanceHook Uniswap v4 hook: build, test, configure and deploy it with a mined CREATE2 salt.",
+  "plugins": [
+    {
+      "name": "epoch-rebalance",
+      "source": "./",
+      "description": "EpochRebalanceHook Uniswap v4 hook: build, test, configure and deploy it with a mined CREATE2 salt.",
+      "tags": [
+        "uniswap-v4",
+        "hooks",
+        "solidity",
+        "foundry",
+        "curve",
+        "index",
+        "rebalancing"
+      ]
+    }
+  ]
+}

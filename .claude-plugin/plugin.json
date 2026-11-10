@@ -1,0 +1,19 @@
+{
+  "name": "epoch-rebalance",
+  "version": "1.0.0",
+  "description": "EpochRebalanceHook Uniswap v4 hook: build, test, configure and deploy it with a mined CREATE2 salt.",
+  "author": {
+    "name": "nirholas"
+  },
+  "repository": "https://github.com/nirholas/epoch-rebalance",
+  "license": "Apache-2.0",
+  "keywords": [
+    "uniswap-v4",
+    "hooks",
+    "solidity",
+    "foundry",
+    "curve",
+    "index",
+    "rebalancing"
+  ]
+}
